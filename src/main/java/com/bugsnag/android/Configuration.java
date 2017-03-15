@@ -1,4 +1,4 @@
-package com.paymytable.sdk.core.bugsnag;
+package com.paymytable.sdk.core.bugsnag.src.main.java.com.bugsnag.android;
 
 import android.support.annotation.NonNull;
 
@@ -129,7 +129,7 @@ public class Configuration extends Observable implements Observer {
      * Set the buildUUID to your own value. This is used to identify proguard
      * mapping files in the case that you publish multiple different apps with
      * the same appId and versionCode. The default value is read from the
-     * com.paymytable.sdk.core.bugsnag.BUILD_UUID meta-data field in your app manifest.
+     * com.paymytable.sdk.core.bugsnag.src.main.java.com.bugsnag.android.BUILD_UUID meta-data field in your app manifest.
      *
      * @param buildUUID the buildUUID.
      */

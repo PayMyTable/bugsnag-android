@@ -1,4 +1,4 @@
-package com.paymytable.sdk.core.bugsnag;
+package com.paymytable.sdk.core.bugsnag.src.main.java.com.bugsnag.android;
 
 /**
  * Used to inform the NDK library which type of data needs to be updated

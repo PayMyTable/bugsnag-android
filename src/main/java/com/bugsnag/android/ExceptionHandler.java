@@ -1,4 +1,4 @@
-package com.paymytable.sdk.core.bugsnag;
+package com.paymytable.sdk.core.bugsnag.src.main.java.com.bugsnag.android;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.WeakHashMap;

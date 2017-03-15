@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.paymytable.sdk.core.bugsnag;
+package com.paymytable.sdk.core.bugsnag.src.main.java.com.bugsnag.android;
 
 import java.io.Closeable;
 import java.io.IOException;
