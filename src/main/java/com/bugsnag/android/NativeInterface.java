@@ -1,4 +1,4 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 import java.sql.BatchUpdateException;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class NativeInterface {
         // Ensure that the bugsnag observer is registered
         // Should only happen if the NDK library is present
         try {
-            String className = "com.bugsnag.android.ndk.BugsnagObserver";
+            String className = "com.paymytable.sdk.core.bugsnag.ndk.BugsnagObserver";
             Class c = Class.forName(className);
             Observer o = (Observer)c.newInstance();
             client.addObserver(o);

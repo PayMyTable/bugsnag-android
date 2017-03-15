@@ -1,4 +1,4 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 /**
  * Used to store information about an exception that was not provided with an exception object

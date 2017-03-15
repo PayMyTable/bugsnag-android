@@ -1,4 +1,4 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 import java.io.File;
 import java.io.FileWriter;

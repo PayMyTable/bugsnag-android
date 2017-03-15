@@ -1,4 +1,4 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 
 /**
@@ -7,7 +7,7 @@ package com.bugsnag.android;
  * Use this to add or modify error report information before it is sent to
  * Bugsnag.
  *
- * @see com.bugsnag.android.Bugsnag#notify(Throwable,Callback)
+ * @see com.paymytable.sdk.core.bugsnag.Bugsnag#notify(Throwable,Callback)
  */
 public interface Callback {
 

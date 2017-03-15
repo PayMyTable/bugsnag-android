@@ -1,4 +1,4 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

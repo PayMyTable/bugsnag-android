@@ -1,9 +1,10 @@
-package com.bugsnag.android;
+package com.paymytable.sdk.core.bugsnag;
 
 import java.util.Map;
-import java.util.Observer;
 
 import android.content.Context;
+import com.paymytable.sdk.core.util.PmtConstants;
+
 
 /**
  * Static access to a Bugsnag Client, the easiest way to use Bugsnag in your Android app.
@@ -102,7 +103,7 @@ public final class Bugsnag {
      * endpoint.
      *
      * @param  endpoint  the custom endpoint to send report to
-     * @deprecated use {@link com.bugsnag.android.Configuration#setEndpoint(String)} instead.
+     * @deprecated use {@link com.paymytable.sdk.core.bugsnag.Configuration#setEndpoint(String)} instead.
      */
     @Deprecated
     public static void setEndpoint(final String endpoint) {
@@ -113,7 +114,7 @@ public final class Bugsnag {
      * Set the buildUUID to your own value. This is used to identify proguard
      * mapping files in the case that you publish multiple different apps with
      * the same appId and versionCode. The default value is read from the
-     * com.bugsnag.android.BUILD_UUID meta-data field in your app manifest.
+     * com.paymytable.sdk.core.bugsnag.BUILD_UUID meta-data field in your app manifest.
      *
      * @param  buildUUID  the buildUUID.
      */
@@ -529,5 +530,15 @@ public final class Bugsnag {
         }
 
         return client;
+    }
+
+
+    public static boolean isSdkException(Error error) {
+        for (StackTraceElement element : error.getException().getStackTrace()) {
+            if (element.getClassName().contains(PmtConstants.PMT_SDK_PACKAGE_NAME)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
