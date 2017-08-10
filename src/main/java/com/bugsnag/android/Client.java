@@ -41,10 +41,10 @@ public class Client extends Observable implements Observer {
     private static final String USER_EMAIL_KEY = "user.email";
 
     protected final Configuration config;
-    private final Context appContext;
-    protected final AppData appData;
-    protected final DeviceData deviceData;
-    final Breadcrumbs breadcrumbs;
+    private final   Context     appContext;
+    protected final AppData     appData;
+    protected final DeviceData  deviceData;
+    final           Breadcrumbs breadcrumbs;
     protected final User user = new User();
     protected final ErrorStore errorStore;
 
@@ -935,5 +935,9 @@ public class Client extends Observable implements Observer {
         error.setMetaData(metaData);
         error.setContext(context);
         notify(error, BLOCKING);
+    }
+
+    public Context getAppContext() {
+        return appContext;
     }
 }
