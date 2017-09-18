@@ -17,6 +17,9 @@ import com.paymytable.sdk.core.util.PmtConstants;
  */
 public final class Bugsnag {
     static Client client;
+
+    static boolean init = false;
+
     private Bugsnag() {}
 
     /**
@@ -27,6 +30,7 @@ public final class Bugsnag {
     public static Client init(Context androidContext) {
         client = new Client(androidContext);
         NativeInterface.configureClientObservers(client);
+        init = true;
         return client;
     }
 
@@ -39,6 +43,7 @@ public final class Bugsnag {
     public static Client init(Context androidContext, String apiKey) {
         client = new Client(androidContext, apiKey);
         NativeInterface.configureClientObservers(client);
+        init = true;
         return client;
     }
 
@@ -52,6 +57,7 @@ public final class Bugsnag {
     public static Client init(Context androidContext, String apiKey, boolean enableExceptionHandler) {
         client = new Client(androidContext, apiKey, enableExceptionHandler);
         NativeInterface.configureClientObservers(client);
+        init = true;
         return client;
     }
 
@@ -64,6 +70,7 @@ public final class Bugsnag {
     public static Client init(Context androidContext, Configuration config) {
         client = new Client(androidContext, config);
         NativeInterface.configureClientObservers(client);
+        init = true;
         return client;
     }
 
@@ -289,7 +296,9 @@ public final class Bugsnag {
      * @param  exception  the exception to send to Bugsnag
      */
     public static void notify(final Throwable exception) {
-        getClient().notify(exception);
+        if (isInit()) {
+            getClient().notify(exception);
+        }
     }
 
     /**
@@ -300,7 +309,9 @@ public final class Bugsnag {
      *                  additional modification
      */
     public static void notify(final Throwable exception, final Callback callback) {
-        getClient().notify(exception, callback);
+        if (isInit()) {
+            getClient().notify(exception, callback);
+        }
     }
 
     /**
@@ -313,7 +324,9 @@ public final class Bugsnag {
      *                   additional modification
      */
     public static void notify(String name, String message, StackTraceElement[] stacktrace, Callback callback) {
-        getClient().notify(name, message, stacktrace, callback);
+        if (isInit()) {
+            getClient().notify(name, message, stacktrace, callback);
+        }
     }
 
     /**
@@ -324,7 +337,9 @@ public final class Bugsnag {
      *                    Severity.WARNING or Severity.INFO
      */
     public static void notify(final Throwable exception, final Severity severity) {
-        getClient().notify(exception, severity);
+        if (isInit()) {
+            getClient().notify(exception, severity);
+        }
     }
 
     /**
@@ -337,12 +352,14 @@ public final class Bugsnag {
      *             to send and modify error reports
      */
     public static void notify(final Throwable exception, final MetaData metaData) {
-        getClient().notify(exception, new Callback() {
-            @Override
-            public void beforeNotify(Report report) {
-                report.getError().setMetaData(metaData);
-            }
-        });
+        if (isInit()) {
+            getClient().notify(exception, new Callback() {
+                @Override
+                public void beforeNotify(Report report) {
+                    report.getError().setMetaData(metaData);
+                }
+            });
+        }
     }
 
     /**
@@ -358,13 +375,15 @@ public final class Bugsnag {
      */
     @Deprecated
     public static void notify(final Throwable exception, final Severity severity, final MetaData metaData) {
-        getClient().notify(exception, new Callback() {
-            @Override
-            public void beforeNotify(Report report) {
-                report.getError().setSeverity(severity);
-                report.getError().setMetaData(metaData);
-            }
-        });
+        if (isInit()) {
+            getClient().notify(exception, new Callback() {
+                @Override
+                public void beforeNotify(Report report) {
+                    report.getError().setSeverity(severity);
+                    report.getError().setMetaData(metaData);
+                }
+            });
+        }
     }
 
     /**
@@ -382,15 +401,17 @@ public final class Bugsnag {
      */
     @Deprecated
     public static void notify(String name, String message, StackTraceElement[] stacktrace, Severity severity, MetaData metaData) {
-        final Severity finalSeverity = severity;
-        final MetaData finalMetaData = metaData;
-        getClient().notify(name, message, stacktrace, new Callback() {
-            @Override
-            public void beforeNotify(Report report) {
-                report.getError().setSeverity(finalSeverity);
-                report.getError().setMetaData(finalMetaData);
-            }
-        });
+        if (isInit()) {
+            final Severity finalSeverity = severity;
+            final MetaData finalMetaData = metaData;
+            getClient().notify(name, message, stacktrace, new Callback() {
+                @Override
+                public void beforeNotify(Report report) {
+                    report.getError().setSeverity(finalSeverity);
+                    report.getError().setMetaData(finalMetaData);
+                }
+            });
+        }
     }
 
     /**
@@ -409,17 +430,19 @@ public final class Bugsnag {
      */
     @Deprecated
     public static void notify(String name, String message, String context, StackTraceElement[] stacktrace, Severity severity, MetaData metaData) {
-        final String finalContext = context;
-        final Severity finalSeverity = severity;
-        final MetaData finalMetaData = metaData;
-        getClient().notify(name, message, stacktrace, new Callback() {
-            @Override
-            public void beforeNotify(Report report) {
-                report.getError().setSeverity(finalSeverity);
-                report.getError().setMetaData(finalMetaData);
-                report.getError().setContext(finalContext);
-            }
-        });
+        if (isInit()) {
+            final String finalContext = context;
+            final Severity finalSeverity = severity;
+            final MetaData finalMetaData = metaData;
+            getClient().notify(name, message, stacktrace, new Callback() {
+                @Override
+                public void beforeNotify(Report report) {
+                    report.getError().setSeverity(finalSeverity);
+                    report.getError().setMetaData(finalMetaData);
+                    report.getError().setContext(finalContext);
+                }
+            });
+        }
     }
 
     /**
@@ -540,5 +563,9 @@ public final class Bugsnag {
             }
         }
         return false;
+    }
+
+    public static boolean isInit() {
+        return init;
     }
 }
