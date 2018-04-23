@@ -1,3 +1,5 @@
+package com.paymytable.sdk.core.bugsnag
+
 buildscript {
     repositories {
         jcenter()
@@ -5,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.1.1'
     }
 }
 
@@ -26,7 +28,7 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-annotations:25.1.1"
+    api "com.android.support:support-annotations:27.1.1"
 }
 
 // Disable doclint:
